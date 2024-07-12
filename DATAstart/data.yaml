@@ -1,0 +1,6 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 33
+names: ['ITU', 'switch', 'M', 'WH', 'YZIP', 'OPS', 'U<', 'HL', 'QFU', 'TT', 'PA', 'XS', 'Q', 'Текст', 'AVR', 'FU', 'QW', 'Timer', 'AUX', 'QD', 'PV', 'MX', 'Шкаф', 'QFD', 'SB', 'S', 'QF', 'KM', 'FR', 'FV', 'K', 'PM', 'R', 'QS']

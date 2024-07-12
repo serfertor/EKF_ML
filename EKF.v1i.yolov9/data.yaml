@@ -1,0 +1,13 @@
+train: C:\Users\Sherri\PycharmProjects\pythonProject\EKF.v1i.yolov9\test\images
+val: C:\Users\Sherri\PycharmProjects\pythonProject\EKF.v1i.yolov9\valid
+test: ../test/images
+
+nc: 32
+names: ['-', 'AUX', 'AVR', 'FR', 'FU', 'FV', 'HL', 'ITU', 'K', 'KM', 'M', 'MX', 'OPS', 'PA', 'PM', 'PV', 'Q', 'QD', 'QF', 'QFD', 'QFU', 'QS', 'QW', 'R', 'S', 'TT', 'Timer', 'U-', 'WH', 'XS', 'YZIP', 'switch']
+
+roboflow:
+  workspace: yolotest-q7i33
+  project: ekf
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/yolotest-q7i33/ekf/dataset/1
