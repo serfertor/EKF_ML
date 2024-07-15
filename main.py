@@ -2,7 +2,7 @@ from ultralytics import YOLOv10
 import cv2 as cv
 import numpy as np
 import easyocr
-import pytesseract
+
 
 class ML:
     translation = {'-': 'text', 'AUX': "Вспомогательный", 'AVR': "АВР", 'FR': "ФР",
@@ -10,7 +10,7 @@ class ML:
                    'HL': "Лампа накаливания сигнальная", 'ITU': "Расцепитель независимый",
                    'K': "Катушка электромеханического устройства", 'KM': "Контакт контактора", 'M': "Электродвигатель",
                    'MX': "MX", 'OPS': "ОПС", 'PA': "Амперметр", 'PM': "Мультиметр", 'PV': "Вольтметр",
-                   'Q': "Выключатель высоковольтный",'QD': "Выключатель дифференциальный",
+                   'Q': "Выключатель высоковольтный", 'QD': "Выключатель дифференциальный",
                    'QF': "Выключатель-предохранитель", 'QFD': "Выключатель автоматический дифференциальный",
                    'QFU': "Предохранитель-разъединитель", 'QS': "Разъединитель",
                    'QW': "Выключатель нагрузки", 'R': "Реле", 'S': "Рукоятка", 'TT': "Трансформатор", 'Timer': "Таймер",
@@ -71,11 +71,9 @@ class ML:
         result = []
         img = cv.imread(self.picture_path)
         for i in self.grouped_objects:
-            print(self.reader.readtext(img[i[1][1]:i[1][3], i[1][0]:i[1][2]]))
+            print(self.reader.readtext(img[i[1][1]:i[1][3], i[1][0]:i[1][2]], detail=0))
             result.append(i[0])
-            break
         print(result)
-
 
 
 if __name__ == '__main__':
