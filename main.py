@@ -2,9 +2,10 @@ from ultralytics import YOLOv10
 import cv2 as cv
 import numpy as np
 import easyocr
-import pytesseract
+
 
 class ML:
+
     translation = {'-': 'text', 'AUX': "Вспомогательный", 'AVR': "АВР", 'FR': "ФР",
                    'FU': "Предохранитель плавкий/Быстродействующий", 'FV': "Разрядник вентильный/Трубчатый",
                    'HL': "Лампа накаливания сигнальная", 'ITU': "Расцепитель независимый",
