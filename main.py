@@ -1,3 +1,6 @@
+import os
+import pickle
+
 from ultralytics import YOLOv10
 import cv2 as cv
 import numpy as np
@@ -35,6 +38,11 @@ class ML:
         self.model = YOLOv10(weights)
         self.reader = easyocr.Reader(['en', 'ru'])
         self.result = []
+        if os.path.isfile("dictionary.pickle"):
+            with open("dictionary.pickle", "rb") as f:
+                self.dictionary = pickle.load(f)
+        else:
+            self.dictionary = None
 
     def detect(self, picture_path):
         result = self.model.predict(source=picture_path, conf=0.75)
@@ -84,20 +92,40 @@ class ML:
                 self.result.append(k)
                 continue
 
+    def fix_words(self, words):
+        if isinstance(words, list):
+            words = " ".join(words)
+        print(words)
+        if self.dictionary is None:
+            print("No dictionary")
+            return words
+        corrected_text = ""
+        for word in words.split():
+            new_word = str(self.dictionary.correction(word))
+            if new_word == "None":
+                corrected_text += word + ' '
+            else:
+                corrected_text += new_word + ' '
+        return corrected_text
+
     def use_ocr(self):
         img = cv.imread(self.picture_path)
         for i in self.grouped_objects:
             print(self.reader.readtext(img[i[1][1]:i[1][3], i[1][0]:i[1][2]], detail=0))
-            self.result.append(i[0])
+            self.result.append(str(i[0] + " " + self.fix_words(self.reader.readtext(img[i[1][1]:i[1][3], i[1][0]:i[1][2]], detail=0))))
+            # print(i[0])
+            # self.result.append(self.fix_words(i[0]))
+        # print(self.result)
         print(self.result)
+        return self.result
 
 
 if __name__ == '__main__':
-
     ml = ML()
     print({v: k for k, v in ML.translation.items()})
     ml.detect_show('DATAstart/images/205-page-00001.jpg')
     cv.waitKey(0)
+    print(ml.fix_words("UptiUin"))
 
 
 
