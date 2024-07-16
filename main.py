@@ -8,7 +8,6 @@ import easyocr
 
 
 class ML:
-
     translation = {'-': 'text', 'AUX': "Вспомогательный", 'AVR': "АВР", 'FR': "ФР",
                    'FU': "Предохранитель плавкий/Быстродействующий", 'FV': "Разрядник вентильный/Трубчатый",
                    'HL': "Лампа накаливания сигнальная", 'ITU': "Расцепитель независимый",
@@ -32,6 +31,7 @@ class ML:
                  'Выключатель нагрузки': 1, 'Реле': 1, 'Рукоятка': 0, 'Трансформатор': 1, 'Таймер': 1,
                  'Минимальное напряжение': 0,
                  'Счетчик активной энергии': 1, 'Гнездо': 0, 'УЗИП': 1, 'Переключатель': 1}
+
     def __init__(self, weights="./bestTimur.pt"):
         self.picture_path = None
         self.grouped_objects = {}
@@ -106,7 +106,7 @@ class ML:
                 corrected_text += word + ' '
             else:
                 corrected_text += new_word + ' '
-        return corrected_text
+        return corrected_text.replace("[", "").replace("]", "")
 
     def use_ocr(self):
         img = cv.imread(self.picture_path)
@@ -125,7 +125,6 @@ if __name__ == '__main__':
     print({v: k for k, v in ML.translation.items()})
     ml.detect_show('DATAstart/images/205-page-00001.jpg')
     cv.waitKey(0)
-    print(ml.fix_words("UptiUin"))
 
 
 
