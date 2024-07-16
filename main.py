@@ -44,12 +44,12 @@ class ML:
         else:
             self.dictionary = None
 
-    def detect(self, picture_path):
+    def detect(self, picture_path: str):
         result = self.model.predict(source=picture_path, conf=0.75)
         self.picture_path = picture_path
         return self.result_structured(result[0])
 
-    def detect_show(self, picture_path):
+    def detect_show(self, picture_path: str):
         result = self.model.predict(source=picture_path, conf=0.75, show=True, show_labels=True, show_boxes=True,
                                     save=True, iou=1.0)
         self.picture_path = picture_path
@@ -92,7 +92,7 @@ class ML:
                 self.result.append(k)
                 continue
 
-    def fix_words(self, words):
+    def fix_words(self, words: str | list):
         if isinstance(words, list):
             words = " ".join(words)
         print(words)
@@ -122,9 +122,9 @@ class ML:
 
 if __name__ == '__main__':
     ml = ML()
-    print({v: k for k, v in ML.translation.items()})
-    ml.detect_show('DATAstart/images/205-page-00001.jpg')
-    cv.waitKey(0)
+    # print({v: k for k, v in ML.translation.items()})
+    print(ml.detect('DATAstart/images/205-page-00001.jpg'))
+    # cv.waitKey(0)
 
 
 
